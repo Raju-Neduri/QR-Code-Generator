@@ -18,8 +18,8 @@ A simple and responsive QR Code Generator web app built with **HTML**, **CSS**, 
 
 Check out the live demo: [QR Code Generator Preview](https://raju-neduri.github.io/QR-Code-Generator/)
 
-![QR Code Generator Preview](Preview\image.png)
-![QR Code Generator Preview](Preview\image2.png)
+![QR Code Generator Preview](https://raw.githubusercontent.com/Raju-Neduri/QR-Code-Generator/main/Preview/image.png)
+![QR Code Generator Preview](https://raw.githubusercontent.com/Raju-Neduri/QR-Code-Generator/main/Preview/image2.png)
 
 ---
 
