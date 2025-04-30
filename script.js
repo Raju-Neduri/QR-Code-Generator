@@ -27,6 +27,12 @@ function generateQR() {
 
   // Enable download button
   downloadBtn.style.display = "inline-block";
+
+  // Add click event to open QR code in a new tab when clicked on the image
+  qrImage.addEventListener("click", () => {
+    const newTab = window.open(apiUrl, "_blank");
+    newTab.focus(); // Focus on the new tab
+  });
 }
 
 function resetQR() {
@@ -46,7 +52,7 @@ function resetQR() {
 function downloadQR() {
   const qrImage = document.getElementById("qrImage");
   const link = document.createElement("a");
-  link.href = qrImage.src;
-  link.download = "qr-code.png";
+  link.href = qrImage.src; // Get the QR code image URL
+  link.target = "_blank"; // Open in a new tab
   link.click();
 }
