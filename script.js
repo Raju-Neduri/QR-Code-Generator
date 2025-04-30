@@ -1,31 +1,52 @@
-const inputBox = document.getElementById("qrText");
-const imgBox = document.getElementById("imgBox");
-const qrImage = document.getElementById("qrImage");
-const generateBtn = document.getElementById("generateBtn");
-const resetBtn = document.getElementById("resetBtn");
-
 function generateQR() {
-  const inputValue = inputBox.value.trim();
+  const qrText = document.getElementById("qrText").value;
+  const qrImage = document.getElementById("qrImage");
+  const generateBtn = document.getElementById("generateBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const downloadBtn = document.getElementById("downloadBtn");
 
-  if (inputValue === "") {
-    inputBox.classList.add("error");
-    setTimeout(() => inputBox.classList.remove("error"), 500);
+  // Input validation
+  if (!qrText) {
+    document.getElementById("qrText").classList.add("error");
+    setTimeout(() => {
+      document.getElementById("qrText").classList.remove("error");
+    }, 300);
     return;
   }
 
-  qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
-    inputValue
-  )}`;
-
+  // Disable the generate button and generate QR code
   generateBtn.style.display = "none";
-  resetBtn.style.display = "block";
-  imgBox.classList.add("show-img");
+  resetBtn.style.display = "inline-block";
+
+  const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
+    qrText
+  )}&size=200x200`;
+
+  qrImage.src = apiUrl;
+  document.getElementById("imgBox").classList.add("show-img");
+
+  // Enable download button
+  downloadBtn.style.display = "inline-block";
 }
 
 function resetQR() {
-  inputBox.value = "";
-  imgBox.classList.remove("show-img");
-  qrImage.src = "";
-  generateBtn.style.display = "block";
+  document.getElementById("qrText").value = "";
+  document.getElementById("qrImage").src = "";
+  document.getElementById("imgBox").classList.remove("show-img");
+
+  const generateBtn = document.getElementById("generateBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const downloadBtn = document.getElementById("downloadBtn");
+
+  generateBtn.style.display = "inline-block";
   resetBtn.style.display = "none";
+  downloadBtn.style.display = "none";
+}
+
+function downloadQR() {
+  const qrImage = document.getElementById("qrImage");
+  const link = document.createElement("a");
+  link.href = qrImage.src;
+  link.download = "qr-code.png";
+  link.click();
 }
